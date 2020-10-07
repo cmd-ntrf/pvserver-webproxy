@@ -6,7 +6,7 @@
         <h3>Instructions</h3>
         <p>
             <ol>
-                <li>In a terminal on your computer, create an SSH tunnel between the compute node and your computer using the following command]
+                <li>In a terminal on your computer, create an SSH tunnel between the compute node and your computer using the following command:
                     <pre>ssh {{username}}@{{machine_name}} -L {{port}}:{{hostname}}:{{port}}</pre>
                 </li>
                 <li>Start ParaView on your computer</li>
@@ -25,6 +25,6 @@
             </ol>
         </p>
         <h3>Command-line output</h3>
-        <pre>{{lines}}</pre>
+        <pre>{% for line in lines %}{{line}}{% end %}</pre>
     </body>
 </html>
