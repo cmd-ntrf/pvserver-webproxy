@@ -1,5 +1,6 @@
 import getpass
 import socket
+import subprocess
 import sys
 
 import tornado.ioloop
@@ -40,6 +41,7 @@ class MainHandler(tornado.web.RequestHandler):
                     machine_name=machine_name,
                     hostname=socket.getfqdn(),
                     port=PARAVIEW_PORT,
+                    version=PARAVIEW_VERSION,
                     lines=thread.lines)
 
 if __name__ == "__main__":
@@ -48,7 +50,8 @@ if __name__ == "__main__":
     app.listen(WEBSERVER_PORT)
 
     PARAVIEW_PORT = find_free_port()
-    thread = CommandThread(['paraview-mesa', 'pvserver', '--backend', 'swr', '--', '--server-port={}'.format(PARAVIEW_PORT)])
+    PARAVIEW_VERSION = subprocess.check_output(['pvserver', '--version']).split()[-1]
+    thread = CommandThread(['paraview-mesa', 'pvserver', '--backend', 'swr', '--', '--server-port={}'.format(PARAVIEW_PORT), '--connect-id=12345'])
     thread.start()
 
     tornado.ioloop.IOLoop.current().start()
