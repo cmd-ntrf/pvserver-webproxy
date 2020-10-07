@@ -25,9 +25,9 @@ class CommandThread(threading.Thread):
         self.lines = []
 
     def run(self):
-        p = Popen(self.cmd, stdout=PIPE, stdin=PIPE, stderr=STDOUT)
-        while True:
-            self.lines.append(p.stdout.readline())
+        self.proc = Popen(self.cmd, stdout=PIPE, stdin=PIPE, stderr=STDOUT)
+        while self.proc:
+            self.lines.append(self.proc.stdout.readline())
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
@@ -44,14 +44,23 @@ class MainHandler(tornado.web.RequestHandler):
                     version=PARAVIEW_VERSION,
                     lines=thread.lines)
 
+class StopHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.write('Stopping ParaView Server...')
+        if '/user' in self.request.uri:
+            self.redirect('/hub/home')
+        self.finish()
+        tornado.ioloop.IOLoop.current().stop()
+
 if __name__ == "__main__":
     WEBSERVER_PORT = sys.argv[1]
-    app = tornado.web.Application([(r"/", MainHandler),])
+    app = tornado.web.Application([(r"/", MainHandler), (r"/stop", StopHandler),])
     app.listen(WEBSERVER_PORT)
 
     PARAVIEW_PORT = find_free_port()
     PARAVIEW_VERSION = subprocess.check_output(['pvserver', '--version']).split()[-1]
     thread = CommandThread(['paraview-mesa', 'pvserver', '--backend', 'swr', '--', '--server-port={}'.format(PARAVIEW_PORT)])
+    thread.daemon = True
     thread.start()
 
     tornado.ioloop.IOLoop.current().start()
