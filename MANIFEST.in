@@ -1,2 +1,1 @@
-include pvserver-webproxy/*.py
-include pvserver-webproxy/*.html
+graft pvserver-webproxy/template.html
