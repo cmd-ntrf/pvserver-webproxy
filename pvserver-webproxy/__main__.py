@@ -34,7 +34,7 @@ class MainHandler(tornado.web.RequestHandler):
         machine_name = self.request.host
         machine_name = machine_name.split(':')[0]
         if machine_name != "localhost":
-            machine_name = "".join(machine_name.split('.')[1:])
+            machine_name = ".".join(machine_name.split('.')[1:])
         self.render("template.html", 
                     title="Paraview Server",
                     username=getpass.getuser(),
