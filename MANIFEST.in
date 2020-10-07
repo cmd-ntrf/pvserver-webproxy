@@ -1,0 +1,2 @@
+include pvserver-webproxy/*.py
+include pvserver-webproxy/*.html
