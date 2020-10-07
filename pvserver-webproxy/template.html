@@ -1,0 +1,30 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <h3>Instructions</h3>
+        <p>
+            <ol>
+                <li>In a terminal on your computer, create an SSH tunnel between the compute node and your computer using the following command]
+                    <pre>ssh {{username}}@{{machine_name}} -L {{port}}:{{hostname}}:{{port}}</pre>
+                </li>
+                <li>Start ParaView on your computer</li>
+                <li>Go to File -> Connect</li> 
+                <li>Click on Add Server</li>
+                <li>Click on Configure, select Manual, and enter:
+                    <pre>name = {{machine_name}}
+                    type = Client/Server
+                    host = {{machine_name}}
+                    port = {{port}}
+                    </pre>
+                </li>
+                <li>Click on Save</li>
+                <li>Select the server from the list and click on Connect. If you refresh this page, you should see "Client connected" in the command-line output section.</li>
+                <li>Open a file in ParaView (it will point to your remote filesystem) and visualize it as usual.</li>
+            </ol>
+        </p>
+        <h3>Command-line output</h3>
+        <pre>{{lines}}</pre>
+    </body>
+</html>
