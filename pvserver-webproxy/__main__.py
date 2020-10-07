@@ -51,7 +51,7 @@ if __name__ == "__main__":
 
     PARAVIEW_PORT = find_free_port()
     PARAVIEW_VERSION = subprocess.check_output(['pvserver', '--version']).split()[-1]
-    thread = CommandThread(['paraview-mesa', 'pvserver', '--backend', 'swr', '--', '--server-port={}'.format(PARAVIEW_PORT), '--connect-id=12345'])
+    thread = CommandThread(['paraview-mesa', 'pvserver', '--backend', 'swr', '--', '--server-port={}'.format(PARAVIEW_PORT)])
     thread.start()
 
     tornado.ioloop.IOLoop.current().start()
