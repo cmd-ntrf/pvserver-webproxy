@@ -29,6 +29,8 @@
         <h3>Command-line output</h3>
         <pre>{% for line in lines %}{{line}}{% end %}</pre>
         <hr>
-        <button onclick="location.href='stop'" type="button">Stop ParaView Server</button>
+        {% if jupyterhub %}
+        <button onclick="location.href='/hub/home'" type="button">Control panel</button>
+        {% end %}
     </body>
 </html>

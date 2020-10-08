@@ -1,4 +1,5 @@
 import getpass
+import os
 import socket
 import subprocess
 import sys
@@ -35,6 +36,7 @@ class MainHandler(tornado.web.RequestHandler):
         machine_name = machine_name.split(':')[0]
         if machine_name != "localhost":
             machine_name = ".".join(machine_name.split('.')[1:])
+        jupyterhub = "JUPYTERHUB_API_TOKEN" in os.environ
         self.render("template.html", 
                     title="Paraview Server",
                     username=getpass.getuser(),
@@ -42,13 +44,12 @@ class MainHandler(tornado.web.RequestHandler):
                     hostname=socket.getfqdn(),
                     port=PARAVIEW_PORT,
                     version=PARAVIEW_VERSION,
-                    lines=thread.lines)
+                    lines=thread.lines,
+                    jupyterhub=jupyterhub)
 
 class StopHandler(tornado.web.RequestHandler):
     def get(self):
         self.write('Stopping ParaView Server...')
-        if '/user' in self.request.uri:
-            self.redirect('/hub/home')
         self.finish()
         tornado.ioloop.IOLoop.current().stop()
 
