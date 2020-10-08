@@ -44,3 +44,5 @@ Add the following to `jupyter_notebook_config.json`:
 ```
 
 ## Screenshot
+
+![Image of pvserver-webproxy](./pvserver-webproxy.png)
