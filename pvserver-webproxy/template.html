@@ -7,7 +7,7 @@
         <p>
             <ol>
                 <li>In a terminal on your computer, create an SSH tunnel between the compute node and your computer using the following command:
-                    <pre>ssh {{username}}@{{machine_name}} -L {{port}}:{{hostname}}:{{port}}</pre>
+                    <pre>ssh {{username}}@{{machine_name}} -L 11111:{{hostname}}:{{port}}</pre>
                 </li>
                 <li>Start ParaView {{version}} on your computer</li>
                 <li>Go to File -> Connect</li> 
@@ -16,7 +16,7 @@
                     <pre>name = {{machine_name}}
                     type = Client/Server
                     host = localhost
-                    port = {{port}}
+                    port = 11111
                     </pre>
                 </li>
                 <li>Click on Configure, select Manual</li>
