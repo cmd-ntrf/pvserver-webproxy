@@ -1,31 +1,31 @@
+<!DOCTYPE html>
 <html>
     <head>
-
+        <title>ParaView Server</title>
     </head>
     <body>
         <h3>Instructions</h3>
-        <p>
-            <ol>
-                <li>In a terminal on your computer, create an SSH tunnel between the compute node and your computer using the following command:
-                    <pre>ssh {{username}}@{{machine_name}} -L 11111:{{hostname}}:{{port}}</pre>
-                </li>
-                <li>Start ParaView {{version}} on your computer</li>
-                <li>Go to File -> Connect</li> 
-                <li>Click on Add Server</li>
-                <li>Enter:
-                    <pre>name = {{machine_name}}
-                    type = Client/Server
-                    host = localhost
-                    port = 11111
-                    </pre>
-                </li>
-                <li>Click on Configure, select Manual</li>
-                <li>Click on Save</li>
-                <li>Select the server from the list and click on Connect.</li>
-                <li>If you refresh this page, you should see "Client connected" in the command-line output section.</li>
-                <li>Open a file in ParaView (it will point to your remote filesystem) and visualize it as usual.</li>
-            </ol>
-        </p>
+        <ol>
+            <li>In a terminal on your computer, create an SSH tunnel between the compute node and your computer using the following command:
+                <pre>ssh {{username}}@{{machine_name}} -L 11111:{{hostname}}:{{port}}</pre>
+            </li>
+            <li>Start ParaView {{version}} on your computer</li>
+            <li>Go to File -> Connect</li>
+            <li>Click on Add Server</li>
+            <li>Enter:
+                <ul>
+                    <li>Name: <tt>{{machine_name}}</tt></li>
+                    <li>Server Type: <tt>Client/Server</tt></li>
+                    <li>Host: <tt>localhost</tt></li>
+                    <li>Port: <tt>11111</tt></li>
+                </ul>
+            </li>
+            <li>Click on Configure, select Manual</li>
+            <li>Click on Save</li>
+            <li>Select the server from the list and click on Connect.</li>
+            <li>If you refresh this page, you should see "Client connected" in the command-line output section.</li>
+            <li>Open a file in ParaView (it will point to your remote filesystem) and visualize it as usual.</li>
+        </ol>
         <h3>Command-line output</h3>
         <pre>{% for line in lines %}{{line}}{% end %}</pre>
         <hr>
