@@ -1,1 +1,1 @@
-graft pvserver-webproxy/template.html
+include pvserver-webproxy/template.html
