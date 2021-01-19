@@ -60,7 +60,7 @@ if __name__ == "__main__":
 
     PARAVIEW_PORT = find_free_port()
     PARAVIEW_VERSION = subprocess.check_output(['pvserver', '--version']).split()[-1]
-    thread = CommandThread(['paraview-mesa', 'pvserver', '--backend', 'swr', '--', '--server-port={}'.format(PARAVIEW_PORT)])
+    thread = CommandThread(['mpirun', 'pvserver', '--force-offscreen-rendering' , '--server-port={}'.format(PARAVIEW_PORT)])
     thread.daemon = True
     thread.start()
 
